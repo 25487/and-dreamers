@@ -144,12 +144,12 @@ if ( ! function_exists( 'and_dreamers_setup' ) ) :
 				array(
 					'name'  => 'default' === get_theme_mod( 'primary_color' ) ? __( 'Blue', 'and_dreamers' ) : null,
 					'slug'  => 'primary',
-					'color' => and_dreamers_hsl_hex( 'default' === get_theme_mod( 'primary_color' ) ? 199 : get_theme_mod( 'primary_color_hue', 199 ), 100, 33 ),
+					'color' => '#767676',
 				),
 				array(
 					'name'  => 'default' === get_theme_mod( 'primary_color' ) ? __( 'Dark Blue', 'and_dreamers' ) : null,
 					'slug'  => 'secondary',
-					'color' => and_dreamers_hsl_hex( 'default' === get_theme_mod( 'primary_color' ) ? 199 : get_theme_mod( 'primary_color_hue', 199 ), 100, 23 ),
+					'color' => '#767676',
 				),
 				array(
 					'name'  => __( 'Dark Gray', 'and_dreamers' ),
@@ -252,7 +252,7 @@ add_action( 'after_setup_theme', 'and_dreamers_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function and_dreamers_scripts() {
-	wp_enqueue_style( 'and_dreamers-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'twentynineteen-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 
 	wp_style_add_data( 'and_dreamers-style', 'rtl', 'replace' );
 
@@ -261,7 +261,7 @@ function and_dreamers_scripts() {
 		wp_enqueue_script( 'and_dreamers-touch-navigation', get_theme_file_uri( '/js/touch-keyboard-navigation.js' ), array(), '20181231', true );
 	}
 
-	wp_enqueue_style( 'and_dreamers-print-style', get_template_directory_uri() . '/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
+	wp_enqueue_style( 'twentynineteen-print-style', get_template_directory_uri() . '/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -292,12 +292,12 @@ add_action( 'wp_print_footer_scripts', 'and_dreamers_skip_link_focus_fix' );
  */
 function and_dreamers_editor_customizer_styles() {
 
-	wp_enqueue_style( 'and_dreamers-editor-customizer-styles', get_theme_file_uri( '/style-editor-customizer.css' ), false, '1.1', 'all' );
+	wp_enqueue_style( 'twentynineteen-editor-customizer-styles', get_theme_file_uri( '/style-editor-customizer.css' ), false, '1.1', 'all' );
 
 	if ( 'custom' === get_theme_mod( 'primary_color' ) ) {
 		// Include color patterns.
 		require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
-		wp_add_inline_style( 'and_dreamers-editor-customizer-styles', and_dreamers_custom_colors_css() );
+		wp_add_inline_style( 'twentynineteen-editor-customizer-styles', twentynineteen_custom_colors_css() );
 	}
 }
 add_action( 'enqueue_block_editor_assets', 'and_dreamers_editor_customizer_styles' );
@@ -321,7 +321,7 @@ function and_dreamers_colors_css_wrap() {
 	?>
 
 	<style type="text/css" id="custom-theme-colors" <?php echo is_customize_preview() ? 'data-hue="' . absint( $primary_color ) . '"' : ''; ?>>
-		<?php echo and_dreamers_custom_colors_css(); ?>
+		<?php echo twentynineteen_custom_colors_css(); ?>
 	</style>
 	<?php
 }
